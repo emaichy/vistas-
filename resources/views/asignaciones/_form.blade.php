@@ -26,6 +26,8 @@
 
 <div class="mb-3">
     <label for="Status" class="form-label">Status</label>
-    <input type="text" name="Status" class="form-control" required
-        value="{{ old('Status', $asignacion->Status ?? '') }}">
+    <select name="Status" id="Status" class="form-control" required>
+                <option value="1" {{ old('Status', $asignacion->Status) == 1 ? 'selected' : '' }}>Activo</option>
+                <option value="0" {{ old('Status', $asignacion->Status) == 0 ? 'selected' : '' }}>Inactivo</option>
+            </select>
 </div>

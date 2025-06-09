@@ -9,7 +9,7 @@
             <p><strong>ID Asignación:</strong> {{ $asignacion->ID_Asignacion }}</p>
             <p><strong>Alumno:</strong> {{ $asignacion->alumno->Nombre }} {{ $asignacion->alumno->ApePaterno }}</p>
             <p><strong>Paciente:</strong> {{ $asignacion->paciente->Nombre ?? 'N/A' }}</p>
-            <p><strong>Status:</strong> {{ $asignacion->Status }}</p>
+            <p><strong>Status:</strong> {{ $asignacion->Status== 1 ? 'Activo' : 'Inactivo' }}</p>
             <a href="{{ route('asignaciones.index') }}" class="btn btn-secondary">Volver al listado</a>
         </div>
     </div>

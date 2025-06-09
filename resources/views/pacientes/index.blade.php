@@ -5,6 +5,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Listado de Pacientes</h2>
         <a href="{{ route('pacientes.create') }}" class="btn btn-primary">+ Nuevo Paciente</a>
+        <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
     </div>
 
     @if(session('success'))
@@ -53,6 +54,8 @@
                         @endif
                     </td>
                     <td>
+                        <a href="{{ route('pacientes.show', $paciente->ID_Paciente) }}" class="btn btn-sm btn-info">Ver</a>
+
                         <a href="{{ route('pacientes.edit', $paciente->ID_Paciente) }}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{{ route('pacientes.destroy', $paciente->ID_Paciente) }}" method="POST" class="d-inline">
                             @csrf

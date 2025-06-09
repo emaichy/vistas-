@@ -138,6 +138,13 @@
     </div>
     <div class="col-md-6 mb-3">
         <label>Status</label>
-        <input type="text" name="Status" class="form-control" maxlength="20" value="{{ old('Status', $alumno->Status ?? '') }}">
+  <label>Status</label>
+<select name="Status" class="form-control" required>
+    <option value="1" {{ old('Status', $alumno->Status ?? 1) == 1 ? 'selected' : '' }}>Activo</option>
+    <option value="0" {{ old('Status', $alumno->Status ?? 1) == 0 ? 'selected' : '' }}>Inactivo</option>
+</select>
+
+
+
     </div>
 </div>

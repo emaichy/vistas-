@@ -3,12 +3,13 @@
 @section('content')
 <div class="container mt-4">
     <h2>Lista de Grupos</h2>
-    <a href="{{ route('grupos.create') }}" class="btn btn-primary mb-3">Nuevo Grupo</a>
+    <a href="{{ route('grupos.create') }}" class="btn btn-primary mb-3">+ Nuevo Grupo</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <table class="table table-bordered">
-        <thead>
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -22,7 +23,7 @@
             <tr>
                 <td>{{ $grupo->ID_Grupo }}</td>
                 <td>{{ $grupo->NombreGrupo }}</td>
-                <td>{{ $grupo->maestro->Nombre ?? 'N/A' }}</td>
+                <td>{{ $grupo->maestro ? $grupo->maestro->Nombre . ' ' . $grupo->maestro->ApePaterno . ' ' . $grupo->maestro->ApeMaterno : 'N/A' }}</td>
                 <td>{{ $grupo->semestre->Semestre ?? 'N/A' }}</td>
                 <td>
                     <a href="{{ route('grupos.show', $grupo->ID_Grupo) }}" class="btn btn-info btn-sm">Ver</a>

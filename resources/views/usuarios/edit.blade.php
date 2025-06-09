@@ -30,8 +30,10 @@
 
         <div class="mb-3">
             <label for="Status" class="form-label">Status</label>
-            <input type="number" name="Status" id="Status" class="form-control" 
-                value="{{ old('Status', $usuario->Status) }}">
+            <select name="Status" id="Status" class="form-control" required>
+                <option value="1" {{ old('Status', $usuario->Status) == 1 ? 'selected' : '' }}>Activo</option>
+                <option value="0" {{ old('Status', $usuario->Status) == 0 ? 'selected' : '' }}>Inactivo</option>
+            </select>
         </div>
 
         <div class="text-end mt-3">

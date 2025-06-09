@@ -100,5 +100,12 @@ public function destroy($id)
     return redirect()->route('pacientes.index')->with('success', 'Paciente eliminado.');
 }
 
+public function show($id)
+{
+    $paciente = Pacientes::with('estado', 'municipio')->findOrFail($id);
+    return view('pacientes.show', compact('paciente'));
+}
+
+
 }
 

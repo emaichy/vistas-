@@ -4,6 +4,7 @@
 <div class="container mt-4">
     <h2>Listado de Usuarios</h2>
     <a href="{{ route('usuarios.create') }}" class="btn btn-primary mb-3">+ Nuevo Usuario</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -25,7 +26,7 @@
                 <td>{{ $usuario->ID_Usuario }}</td>
                 <td>{{ $usuario->Correo }}</td>
                 <td>{{ $usuario->Rol }}</td>
-                <td>{{ $usuario->Status }}</td>
+                <td>{{ $usuario->Status == 1 ? 'Activo' : 'Inactivo' }}</td>
                 <td>
                     <a href="{{ route('usuarios.show', $usuario->ID_Usuario) }}" class="btn btn-info btn-sm">Ver</a>
                     <a href="{{ route('usuarios.edit', $usuario->ID_Usuario) }}" class="btn btn-warning btn-sm">Editar</a>

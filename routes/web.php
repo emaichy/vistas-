@@ -61,5 +61,20 @@ use App\Http\Controllers\ExpedienteController;
 
 Route::resource('expedientes', ExpedienteController::class);
 
+Route::resource('tratamientos', \App\Http\Controllers\TratamientosController::class);
+
+Route::resource('documentos', \App\Http\Controllers\DocumentosPacientesController::class);
+
+use App\Http\Controllers\AnexosExpedienteController;
+
+Route::resource('anexos', AnexosExpedienteController::class);
+
+use App\Http\Controllers\NotasEvolucionController;
+
+Route::resource('notasevolucion', NotasEvolucionController::class);
+
+
+
+
 //--------------------------------------------------------------------------
 

@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container mt-4">
+    
     <h2>Lista de Semestres</h2>
-    <a href="{{ route('semestres.create') }}" class="btn btn-primary mb-3">Nuevo Semestre</a>
+    <a href="{{ route('semestres.create') }}" class="btn btn-primary mb-3">+ Nuevo Semestre</a>         
+    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
+
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
+       <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Semestre</th>
@@ -23,7 +27,8 @@
             <tr>
                 <td>{{ $semestre->ID_Semestre }}</td>
                 <td>{{ $semestre->Semestre }}</td>
-                <td>{{ $semestre->Status }}</td>
+                <td>{{ $semestre->Status == 1 ? 'Activo' : 'Inactivo' }}</td>
+
                 <td>
                     <a href="{{ route('semestres.show', $semestre->ID_Semestre) }}" class="btn btn-info btn-sm">Ver</a>
                     <a href="{{ route('semestres.edit', $semestre->ID_Semestre) }}" class="btn btn-warning btn-sm">Editar</a>

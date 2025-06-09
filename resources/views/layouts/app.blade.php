@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <meta charset="UTF-8">
       {{-- Bootstrap 5 CSS (CDN) --}}
@@ -11,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Consentimiento</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Puedes agregar aquí Bootstrap o Tailwind si lo necesitas -->
+  
     <style>
         body {
             font-family: Arial, sans-serif;

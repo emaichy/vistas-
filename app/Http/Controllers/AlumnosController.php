@@ -90,5 +90,12 @@ class AlumnosController extends Controller
 
         return redirect()->route('alumnos.index')->with('success', 'Alumno eliminado correctamente.');
     }
+    public function show($matricula)
+{
+    $alumno = Alumnos::with(['grupo', 'estado', 'municipio'])->findOrFail($matricula);
+
+    return view('alumnos.show', compact('alumno'));
+}
+
 }
 

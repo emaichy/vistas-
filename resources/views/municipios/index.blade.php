@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     <h2>Lista de Municipios</h2>
-    <a href="{{ route('municipios.create') }}" class="btn btn-primary mb-3">Agregar Municipio</a>
+    <a href="{{ route('municipios.create') }}" class="btn btn-primary mb-3">+ Agregar Municipio</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
 
-    <table class="table">
-        <thead>
+      <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -21,7 +22,8 @@
                 <td>{{ $municipio->ID_Municipio }}</td>
                 <td>{{ $municipio->NombreMunicipio }}</td>
                 <td>{{ $municipio->estado->NombreEstado }}</td>
-                <td>{{ $municipio->Status }}</td>
+                <td>{{ $municipio->Status == 1 ? 'Activo' : 'Inactivo' }}</td>
+
                 <td>
                     <a href="{{ route('municipios.show', $municipio->ID_Municipio) }}" class="btn btn-info btn-sm">Ver</a>
                     <a href="{{ route('municipios.edit', $municipio->ID_Municipio) }}" class="btn btn-warning btn-sm">Editar</a>

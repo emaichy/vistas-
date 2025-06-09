@@ -3,12 +3,13 @@
 @section('content')
 <div class="container mt-4">
     <h2>Lista de Maestros</h2>
-    <a href="{{ route('maestros.create') }}" class="btn btn-primary mb-3">Nuevo Maestro</a>
+    <a href="{{ route('maestros.create') }}" class="btn btn-primary mb-3">+ Nuevo Maestro</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Regresar</a>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre Completo</th>
