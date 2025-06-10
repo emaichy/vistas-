@@ -23,8 +23,11 @@
         <tbody>
             @foreach($notas as $nota)
                 <tr>
-                    <td>{{ $nota->id }}</td>
+                    {{-- Accediendo a la clave primaria 'ID_Nota' --}}
+                    <td>{{ $nota->ID_Nota }}</td>
+                    {{-- Accediendo a los datos de la relación alumno --}}
                     <td>{{ $nota->alumno->Nombre }} {{ $nota->alumno->ApePaterno }} {{ $nota->alumno->ApeMaterno }}</td>
+                    {{-- Accediendo a los datos de la relación paciente --}}
                     <td>{{ $nota->paciente->Nombre }} {{ $nota->paciente->ApePaterno }} {{ $nota->paciente->ApeMaterno }}</td>
                     <td>{{ $nota->fecha }}</td>
                     <td>
@@ -35,9 +38,10 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('notasevolucion.show', $nota->id) }}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{{ route('notasevolucion.edit', $nota->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('notasevolucion.destroy', $nota->id) }}" method="POST" style="display:inline-block;">
+                        {{-- Usando $nota->ID_Nota para las rutas --}}
+                        <a href="{{ route('notasevolucion.show', $nota->ID_Nota) }}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{{ route('notasevolucion.edit', $nota->ID_Nota) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ route('notasevolucion.destroy', $nota->ID_Nota) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar esta nota?')">Eliminar</button>

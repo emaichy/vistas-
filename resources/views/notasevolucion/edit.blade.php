@@ -8,7 +8,7 @@
 </div>
 
 <div class="container" style="max-width: 1000px;">
-    <form method="POST" action="{{ route('notasevolucion.update', $nota->id) }}">
+    <form method="POST" action="{{ route('notasevolucion.update', $nota->ID_Nota) }}">
         @csrf
         @method('PUT')
 
@@ -30,13 +30,14 @@
 
             <h3 class="text-center">EDITAR NOTA DE EVOLUCIÓN</h3>
 
-            {{-- Selects --}}
+            {{-- Selección Alumno, Paciente, Semestre y Grupo --}}
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="alumno_id">Alumno</label>
-                    <select name="alumno_id" class="form-control" required>
+                    <select name="ID_Alumno" class="form-control" required>
+                        <option value="">Selecciona un alumno</option>
                         @foreach($alumnos as $alumno)
-                            <option value="{{ $alumno->id }}" {{ $nota->alumno_id == $alumno->id ? 'selected' : '' }}>
+                            <option value="{{ $alumno->Matricula }}" {{ $nota->ID_Alumno == $alumno->Matricula ? 'selected' : '' }}>
                                 {{ $alumno->ApePaterno }} {{ $alumno->ApeMaterno }} {{ $alumno->Nombre }}
                             </option>
                         @endforeach
@@ -44,9 +45,10 @@
                 </div>
                 <div class="col-md-6">
                     <label for="paciente_id">Paciente</label>
-                    <select name="paciente_id" class="form-control" required>
+                    <select name="ID_Paciente" class="form-control" required>
+                        <option value="">Selecciona un paciente</option>
                         @foreach($pacientes as $paciente)
-                            <option value="{{ $paciente->id }}" {{ $nota->paciente_id == $paciente->id ? 'selected' : '' }}>
+                            <option value="{{ $paciente->ID_Paciente }}" {{ $nota->ID_Paciente == $paciente->ID_Paciente ? 'selected' : '' }}>
                                 {{ $paciente->ApePaterno }} {{ $paciente->ApeMaterno }} {{ $paciente->Nombre }}
                             </option>
                         @endforeach
@@ -57,9 +59,10 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="expediente_id">Expediente</label>
-                    <select name="expediente_id" class="form-control" required>
+                    <select name="ID_Expediente" class="form-control" required>
+                        <option value="">Selecciona un expediente</option>
                         @foreach($expedientes as $expediente)
-                            <option value="{{ $expediente->ID_Expediente }}" {{ $nota->expediente_id == $expediente->ID_Expediente ? 'selected' : '' }}>
+                            <option value="{{ $expediente->ID_Expediente }}" {{ $nota->ID_Expediente == $expediente->ID_Expediente ? 'selected' : '' }}>
                                 {{ $expediente->ID_Expediente }}
                             </option>
                         @endforeach
@@ -67,20 +70,22 @@
                 </div>
                 <div class="col-md-3">
                     <label for="semestre_id">Semestre</label>
-                    <select name="semestre_id" class="form-control" required>
+                    <select name="ID_Semestre" class="form-control" required>
+                        <option value="">Selecciona semestre</option>
                         @foreach($semestres as $semestre)
-                            <option value="{{ $semestre->id }}" {{ $nota->semestre_id == $semestre->id ? 'selected' : '' }}>
-                                {{ $semestre->Nombre }}
+                            <option value="{{ $semestre->ID_Semestre }}" {{ $nota->ID_Semestre == $semestre->ID_Semestre ? 'selected' : '' }}>
+                                {{ $semestre->Semestre }}
                             </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label for="grupo_id">Grupo</label>
-                    <select name="grupo_id" class="form-control" required>
+                    <select name="ID_Grupo" class="form-control" required>
+                        <option value="">Selecciona grupo</option>
                         @foreach($grupos as $grupo)
-                            <option value="{{ $grupo->id }}" {{ $nota->grupo_id == $grupo->id ? 'selected' : '' }}>
-                                {{ $grupo->Nombre }}
+                            <option value="{{ $grupo->ID_Grupo }}" {{ $nota->ID_Grupo == $grupo->ID_Grupo ? 'selected' : '' }}>
+                                {{ $grupo->NombreGrupo }}
                             </option>
                         @endforeach
                     </select>
@@ -90,41 +95,46 @@
             {{-- Fecha --}}
             <div class="mb-3">
                 <label for="fecha">Fecha</label>
-                <input type="date" name="fecha" value="{{ $nota->fecha }}" class="form-control" required>
+                <input type="date" name="fecha" value="{{ old('fecha', $nota->fecha) }}" class="form-control" required>
             </div>
 
             {{-- Signos Vitales --}}
             <div class="row mb-3">
-                <div class="col-md-2"><input type="text" name="presion_arterial" value="{{ $nota->presion_arterial }}" placeholder="Presión Arterial" class="form-control"></div>
-                <div class="col-md-2"><input type="text" name="frecuencia_cardiaca" value="{{ $nota->frecuencia_cardiaca }}" placeholder="Frec. Cardíaca" class="form-control"></div>
-                <div class="col-md-2"><input type="text" name="frecuencia_respiratoria" value="{{ $nota->frecuencia_respiratoria }}" placeholder="Frec. Respiratoria" class="form-control"></div>
-                <div class="col-md-2"><input type="text" name="temperatura" value="{{ $nota->temperatura }}" placeholder="Temperatura" class="form-control"></div>
-                <div class="col-md-2"><input type="text" name="oximetria" value="{{ $nota->oximetria }}" placeholder="Oximetría" class="form-control"></div>
+                <div class="col-md-2"><input type="text" name="presion_arterial" placeholder="Presión Arterial" class="form-control" value="{{ $nota->presion_arterial }}"></div>
+                <div class="col-md-2"><input type="text" name="frecuencia_cardiaca" placeholder="Frec. Cardíaca" class="form-control" value="{{ $nota->frecuencia_cardiaca }}"></div>
+                <div class="col-md-2"><input type="text" name="frecuencia_respiratoria" placeholder="Frec. Respiratoria" class="form-control" value="{{ $nota->frecuencia_respiratoria }}"></div>
+                <div class="col-md-2"><input type="text" name="temperatura" placeholder="Temperatura" class="form-control" value="{{ $nota->temperatura }}"></div>
+                <div class="col-md-2"><input type="text" name="oximetria" placeholder="Oximetría" class="form-control" value="{{ $nota->oximetria }}"></div>
             </div>
 
             {{-- Tratamientos --}}
             <div class="mb-3">
                 <label for="tratamiento_realizado">Tratamiento Realizado</label>
-                <textarea name="tratamiento_realizado" class="form-control">{{ $nota->tratamiento_realizado }}</textarea>
+                <textarea name="tratamiento_realizado" class="form-control" rows="2">{{ $nota->tratamiento_realizado }}</textarea>
             </div>
 
             <div class="mb-3">
                 <label for="descripcion_tratamiento">Descripción del Tratamiento</label>
-                <textarea name="descripcion_tratamiento" class="form-control">{{ $nota->descripcion_tratamiento }}</textarea>
+                <textarea name="descripcion_tratamiento" class="form-control" rows="5">{{ $nota->descripcion_tratamiento }}</textarea>
             </div>
 
             {{-- Firmas --}}
-            <div class="row mb-4">
-                @foreach(['catedratico', 'alumno', 'paciente'] as $firma)
-                    <div class="col-md-4 text-center">
-                        <label><strong>Firma {{ ucfirst($firma) }}</strong></label><br>
-                        <canvas id="firma_{{ $firma }}_canvas" width="300" height="100" style="border:1px solid #000;"></canvas>
-                        <input type="hidden" name="firma_{{ $firma }}" id="firma_{{ $firma }}_input" value="{{ $nota['firma_'.$firma] }}">
-                        <button type="button" onclick="limpiarCanvas('firma_{{ $firma }}_canvas')" class="btn btn-sm btn-secondary mt-1">Limpiar</button>
-                    </div>
-                @endforeach
-            </div>
+          {{-- Firmas --}}
+<div class="row mb-4">
+    @foreach(['catedratico', 'alumno', 'paciente'] as $firma)
+        <div class="col-md-4 text-center">
+            <label><strong>Firma {{ ucfirst($firma) }}</strong></label><br>
+            <canvas id="firma_{{ $firma }}_canvas" width="300" height="100" style="border:1px solid #000;"></canvas>
+            <input type="hidden" name="firma_{{ $firma }}" id="firma_{{ $firma }}_input">
+            {{-- Firma previa, para conservar si no se edita --}}
+            <input type="hidden" id="firma_{{ $firma }}_previa" value="{{ $nota->{'firma_'.$firma} }}">
+            <button type="button" onclick="limpiarCanvas('firma_{{ $firma }}')" class="btn btn-sm btn-secondary mt-1">Limpiar</button>
+        </div>
+    @endforeach
+</div>
 
+
+            {{-- Botón --}}
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Actualizar Nota</button>
             </div>
@@ -138,36 +148,46 @@
     let pads = {};
 
     function limpiarCanvas(id) {
-        if (pads[id]) pads[id].clear();
+        if (pads[id]) {
+            pads[id].clear();
+        }
     }
 
-    function capturarFirmas() {
-        ['firma_catedratico', 'firma_alumno', 'firma_paciente'].forEach(id => {
-            const canvas = document.getElementById(id + '_canvas');
-            const input = document.getElementById(id + '_input');
-            input.value = pads[id].isEmpty() ? '' : canvas.toDataURL();
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
+    function cargarFirmasDesdeBD() {
         ['firma_catedratico', 'firma_alumno', 'firma_paciente'].forEach(id => {
             const canvas = document.getElementById(id + '_canvas');
             const pad = new SignaturePad(canvas);
             pads[id] = pad;
 
-            const inputVal = document.getElementById(id + '_input').value;
-            if (inputVal) {
+            const dataURL = document.getElementById(id + '_previa').value;
+            if (dataURL) {
                 const img = new Image();
                 img.onload = () => {
-                    const ctx = canvas.getContext("2d");
+                    const ctx = canvas.getContext('2d');
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 };
-                img.src = inputVal;
+                img.src = dataURL;
             }
         });
+    }
 
+    function capturarFirmas() {
+        ['firma_catedratico', 'firma_alumno', 'firma_paciente'].forEach(id => {
+            const input = document.getElementById(id + '_input');
+            const previa = document.getElementById(id + '_previa');
+            if (pads[id].isEmpty()) {
+                input.value = previa.value; // Mantener firma anterior
+            } else {
+                input.value = pads[id].toDataURL(); // Nueva firma
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarFirmasDesdeBD();
         document.querySelector('form').addEventListener('submit', capturarFirmas);
     });
 </script>
+
 @endsection

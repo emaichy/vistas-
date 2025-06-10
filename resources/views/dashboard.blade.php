@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">Panel Principal</h2>
+    <h2 class="mb-4 text-center">Panel Principal Admininistrativo</h2>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
@@ -18,6 +18,7 @@
                 ['nombre' => 'Usuarios', 'ruta' => 'usuarios.index', 'icono' => 'fas fa-user-cog'],
                 ['nombre' => 'Tratamientos', 'ruta' => 'tratamientos.index', 'icono' => 'fas fa-notes-medical'],
                 ['nombre' => 'Documentos', 'ruta' => 'documentos.index', 'icono' => 'fas fa-documents'],
+                 ['nombre' => 'Notas de Evolucion', 'ruta' => 'notasevolucion.index', 'icono' => 'fas fa-tasks'],
             ];
         @endphp
 
@@ -36,3 +37,4 @@
     </div>
 </div>
 @endsection
+

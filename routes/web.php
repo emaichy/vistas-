@@ -73,8 +73,19 @@ use App\Http\Controllers\NotasEvolucionController;
 
 Route::resource('notasevolucion', NotasEvolucionController::class);
 
+use App\Http\Middleware\AlumnoIsAuthenticated;
+
+Route::middleware(AlumnoIsAuthenticated::class)->group(function () {
+    Route::get('/alumno', function () {
+        return view('alumno.home');
+    })->name('alumno.home');
+});
 
 
+use App\Http\Controllers\AuthController;
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //--------------------------------------------------------------------------
 

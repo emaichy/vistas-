@@ -43,7 +43,7 @@
                         @endswitch
                     </td>
                     <td>
-                        <a href="{{ route('expedientes.show', $exp->ID_Expediente) }}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{{ route('anexos.index', $exp->ID_Expediente) }}" class="btn btn-info btn-sm">Ver</a>
                         <a href="{{ route('expedientes.edit', $exp->ID_Expediente) }}" class="btn btn-warning btn-sm">Editar</a>
                         <form action="{{ route('expedientes.destroy', $exp->ID_Expediente) }}" method="POST" style="display:inline-block">
                             @csrf

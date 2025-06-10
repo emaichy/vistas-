@@ -34,7 +34,8 @@ class NotasEvolucionController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'ID_Alumno' => 'required|exists:alumnos,ID_Alumno',
+            // Cambiado: Ahora la validación 'exists' busca en la columna 'Matricula' de la tabla 'alumnos'
+            'ID_Alumno' => 'required|exists:alumnos,Matricula',
             'ID_Paciente' => 'required|exists:pacientes,ID_Paciente',
             'ID_Expediente' => 'required|exists:expedientes,ID_Expediente',
             'ID_Semestre' => 'required|exists:semestres,ID_Semestre',
@@ -83,38 +84,47 @@ class NotasEvolucionController extends Controller
         ]);
     }
 
-    public function update(Request $request, NotaEvolucion $notasevolucion)
-    {
-        $data = $request->validate([
-            'ID_Alumno' => 'required|exists:alumnos,ID_Alumno',
-            'ID_Paciente' => 'required|exists:pacientes,ID_Paciente',
-            'ID_Expediente' => 'required|exists:expedientes,ID_Expediente',
-            'ID_Semestre' => 'required|exists:semestres,ID_Semestre',
-            'ID_Grupo' => 'required|exists:grupos,ID_Grupo',
-            'fecha' => 'required|date',
-            'presion_arterial' => 'nullable|string|max:255',
-            'frecuencia_cardiaca' => 'nullable|string|max:255',
-            'frecuencia_respiratoria' => 'nullable|string|max:255',
-            'temperatura' => 'nullable|string|max:255',
-            'oximetria' => 'nullable|string|max:255',
-            'tratamiento_realizado' => 'nullable|string',
-            'descripcion_tratamiento' => 'nullable|string',
-            'firma_catedratico' => 'nullable|string',
-            'firma_alumno' => 'nullable|string',
-            'firma_paciente' => 'nullable|string',
-        ]);
+   public function update(Request $request, NotaEvolucion $notasevolucion)
+{
+    $data = $request->validate([
+        'ID_Alumno' => 'required|exists:alumnos,Matricula',
+        'ID_Paciente' => 'required|exists:pacientes,ID_Paciente',
+        'ID_Expediente' => 'required|exists:expedientes,ID_Expediente',
+        'ID_Semestre' => 'required|exists:semestres,ID_Semestre',
+        'ID_Grupo' => 'required|exists:grupos,ID_Grupo',
+        'fecha' => 'required|date',
+        'presion_arterial' => 'nullable|string|max:255',
+        'frecuencia_cardiaca' => 'nullable|string|max:255',
+        'frecuencia_respiratoria' => 'nullable|string|max:255',
+        'temperatura' => 'nullable|string|max:255',
+        'oximetria' => 'nullable|string|max:255',
+        'tratamiento_realizado' => 'nullable|string',
+        'descripcion_tratamiento' => 'nullable|string',
+        'firma_catedratico' => 'nullable|string',
+        'firma_alumno' => 'nullable|string',
+        'firma_paciente' => 'nullable|string',
+    ]);
 
-        $notasevolucion->update($data);
-
-        // Regenerar PDF
-        $pdf = Pdf::loadView('notasevolucion.pdf', ['nota' => $notasevolucion]);
-        $pdfPath = 'notas_evolucion/nota_' . $notasevolucion->ID_Nota . '.pdf';
-        Storage::disk('public')->put($pdfPath, $pdf->output());
-        $notasevolucion->pdf_document = $pdfPath;
-        $notasevolucion->save();
-
-        return redirect()->route('notasevolucion.index')->with('success', 'Nota de evolución actualizada correctamente.');
+    // Eliminar PDF anterior si existe
+    if ($notasevolucion->pdf_document && Storage::disk('public')->exists($notasevolucion->pdf_document)) {
+        Storage::disk('public')->delete($notasevolucion->pdf_document);
     }
+
+    // Actualizar la nota
+    $notasevolucion->update($data);
+
+    // Regenerar el PDF con datos actualizados
+    $pdf = Pdf::loadView('notasevolucion.pdf', ['nota' => $notasevolucion]);
+    $pdfPath = 'notas_evolucion/nota_' . $notasevolucion->ID_Nota . '.pdf';
+    Storage::disk('public')->put($pdfPath, $pdf->output());
+
+    // Guardar ruta actualizada
+    $notasevolucion->pdf_document = $pdfPath;
+    $notasevolucion->save();
+
+    return redirect()->route('notasevolucion.index')->with('success', 'Nota de evolución actualizada correctamente.');
+}
+
 
     public function destroy(NotaEvolucion $notasevolucion)
     {

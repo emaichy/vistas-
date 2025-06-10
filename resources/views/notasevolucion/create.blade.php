@@ -33,51 +33,52 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="alumno_id">Alumno</label>
-                  <select name="ID_Alumno" class="form-control" required>
-    <option value="">Selecciona un alumno</option>
-    @foreach($alumnos as $alumno)
-        <option value="{{ $alumno->id }}">{{ $alumno->ApePaterno }} {{ $alumno->ApeMaterno }} {{ $alumno->Nombre }}</option>
-    @endforeach
-</select>
+                    <select name="ID_Alumno" class="form-control" required>
+                        <option value="">Selecciona un alumno</option>
+                        @foreach($alumnos as $alumno)
+                            {{-- CAMBIO CRÍTICO AQUÍ: Usando $alumno->Matricula en lugar de $alumno->id --}}
+                            <option value="{{ $alumno->Matricula }}">{{ $alumno->ApePaterno }} {{ $alumno->ApeMaterno }} {{ $alumno->Nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="paciente_id">Paciente</label>
                     <select name="ID_Paciente" class="form-control" required>
-    <option value="">Selecciona un paciente</option>
-    @foreach($pacientes as $paciente)
-        <option value="{{ $paciente->id }}">{{ $paciente->ApePaterno }} {{ $paciente->ApeMaterno }} {{ $paciente->Nombre }}</option>
-    @endforeach
-</select>
+                        <option value="">Selecciona un paciente</option>
+                        @foreach($pacientes as $paciente)
+                            <option value="{{ $paciente->ID_Paciente }}">{{ $paciente->ApePaterno }} {{ $paciente->ApeMaterno }} {{ $paciente->Nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="expediente_id">Expediente</label>
-                   <select name="ID_Expediente" class="form-control" required>
-    <option value="">Selecciona un expediente</option>
-    @foreach($expedientes as $expediente)
-        <option value="{{ $expediente->ID_Expediente }}">{{ $expediente->ID_Expediente }}</option>
-    @endforeach
-</select>
+                    <select name="ID_Expediente" class="form-control" required>
+                        <option value="">Selecciona un expediente</option>
+                        @foreach($expedientes as $expediente)
+                            <option value="{{ $expediente->ID_Expediente }}">{{ $expediente->ID_Expediente }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label for="semestre_id">Semestre</label>
-                   <select name="ID_Semestre" class="form-control" required>
-    <option value="">Selecciona semestre</option>
-    @foreach($semestres as $semestre)
-        <option value="{{ $semestre->id }}">{{ $semestre->Semestre }}</option>
-    @endforeach
-</select>
+                    <select name="ID_Semestre" class="form-control" required>
+                        <option value="">Selecciona semestre</option>
+                        @foreach($semestres as $semestre)
+                            <option value="{{ $semestre->ID_Semestre }}">{{ $semestre->Semestre }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label for="grupo_id">Grupo</label>
-                  <select name="ID_Grupo" class="form-control" required>
-    <option value="">Selecciona grupo</option>
-    @foreach($grupos as $grupo)
-        <option value="{{ $grupo->id }}">{{ $grupo->NombreGrupo }}</option>
-    @endforeach
-</select>
+                    <select name="ID_Grupo" class="form-control" required>
+                        <option value="">Selecciona grupo</option>
+                        @foreach($grupos as $grupo)
+                            <option value="{{ $grupo->ID_Grupo }}">{{ $grupo->NombreGrupo }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
