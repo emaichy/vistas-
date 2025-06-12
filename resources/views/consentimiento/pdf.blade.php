@@ -18,7 +18,7 @@
         /* Contenedor principal */
         .container {
             /* AUMENTADO: Ancho considerablemente para que ocupe más de la hoja */
-            max-width: 610px; /* Ancho típico para documentos PDF tamaño carta con márgenes estándar */
+            max-width: 640px; /* Ancho típico para documentos PDF tamaño carta con márgenes estándar */
             margin: 0 auto;
             padding: 25px; /* AUMENTADO: Mayor padding para un mejor aspecto */
             border: 0px solid #000; /* Borde más fino para ahorrar espacio */
@@ -39,12 +39,12 @@
         font-size: 11px;
         line-height: 1.3;
         width: 60%;
-         padding-top: 10px;
+         padding-top: 20px;
     }
 
     .header-logo {
         position: absolute;
-        top: -20;
+        top: -10;
         right: 0;
         width: 120px;
     }
@@ -56,14 +56,15 @@
         /* Título principal */
         h2 {
             text-align: center;
-            margin-top: 10px; /* Ajuste de margen superior */
+           /* margin-top: 10px; /* Ajuste de margen superior */
             margin-bottom: 15px; /* Ajuste de margen inferior */
             font-size: 14px; /* Tamaño de fuente para el título principal ajustado */
+            padding-top: -20px;
         }
 
         /* Secciones de contenido */
         .seccion {
-            margin-bottom: 7px; /* Margen inferior ajustado para las secciones */
+            margin-bottom: 5px; /* Margen inferior ajustado para las secciones */
         }
         .seccion p {
             margin-bottom: 8px; /* Espacio entre párrafos ajustado */
