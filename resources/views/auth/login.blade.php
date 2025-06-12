@@ -179,7 +179,7 @@
         <div class="image-section"></div>
         <div class="form-section">
             <div class="form-box">
-                <img src="imagenes/logo1.png" alt="Logo IUFIM" class="logo">
+                <img src="logo-iufim.png" alt="Logo IUFIM" class="logo">
                 <h3 class="text-center mb-3">Inicia sesión en tu cuenta</h3>
                 <form id="loginForm" action="{{ route('login.post') }}" method="POST">
                     @csrf

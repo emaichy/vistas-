@@ -10,8 +10,11 @@ class UsuariosController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuarios::all();
-        return view('usuarios.index', compact('usuarios'));
+        $usuarios=Usuarios::where('Status', 1)->get();
+        if ($usuarios->isEmpty()) {
+            return redirect()->route('usuarios.create')->with('info', 'No hay usuarios registrados. Por favor, crea un nuevo usuario.');
+        }        
+        return view('usuarios.inicio', compact('usuarios'));
     }
 
     public function create()
@@ -21,59 +24,53 @@ class UsuariosController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'Correo' => 'required|email|unique:usuarios,Correo',
-            'Contrasena' => 'required|string|min:6',
-            'Rol' => 'required|string|max:50',
-            'Status' => 'required|integer',
-        ]);
+        $usuario= new Usuarios();
+        $usuario->Correo = $request->Correo;
+        $usuario->password = Hash::make($request->password);
+        $usuario->save();
 
-        Usuarios::create([
-            'Correo' => $request->Correo,
-            'Contrasena' => Hash::make($request->Contrasena),
-            'Rol' => $request->Rol,
-            'Status' => $request->Status,
-        ]);
-
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente!');
     }
 
-    public function show($id)
+    public function show(Usuarios $usuario)
     {
-        $usuario = Usuarios::findOrFail($id);
+        if (!$usuario) {
+            return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
+        }
         return view('usuarios.show', compact('usuario'));
     }
 
     public function edit($id)
     {
-        $usuario = Usuarios::findOrFail($id);
+        $usuario = Usuarios::find($id);
+        if (!$usuario) {
+            return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
+        }
         return view('usuarios.edit', compact('usuario'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Usuarios $usuario)
     {
-        $usuario = Usuarios::findOrFail($id);
-
-        $request->validate([
-            'Correo' => 'required|email|unique:usuarios,Correo,' . $id . ',ID_Usuario',
-            'Rol' => 'required|string|max:50',
-            'Status' => 'required|integer',
-        ]);
-
+        if (!$usuario) {
+            return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');    
+        }
         $usuario->Correo = $request->Correo;
-        if ($request->filled('Contrasena')) {
-            $usuario->Contrasena = Hash::make($request->Contrasena);
+        if ($request->has('password') && $request->password != '') {
+            $usuario->password = Hash::make($request->password);
         }
         $usuario->Rol = $request->Rol;
-        $usuario->Status = $request->Status;
         $usuario->save();
-
-        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente!');
     }
 
     public function destroy($id)
     {
-        Usuarios::findOrFail($id)->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
+        $usuario = Usuarios::find($id);
+        if (!$usuario) {
+            return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
+        }
+
+        $usuario->update(['Status'=>0]);
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente!');
     }
 }

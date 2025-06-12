@@ -193,7 +193,7 @@
         </tr>
         <tr>
             <th class="row-header">Nombre del Paciente</th>
-            <th class="table-header-row" colspan="3">Apellido Paterno / Materno / Nombre(s)</th>
+            <th class="table-header-row" colspan="3">Apellido Paterno / Apellido Materno / Nombre(s)</th>
             <th class="row-header">No. de Expediente</th>
         </tr>
         <tr>

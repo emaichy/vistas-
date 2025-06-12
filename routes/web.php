@@ -73,6 +73,12 @@ use App\Http\Controllers\NotasEvolucionController;
 
 Route::resource('notasevolucion', NotasEvolucionController::class);
 
+
+use App\Http\Controllers\ConsentimientoController;
+
+Route::resource('consentimiento', ConsentimientoController::class);
+
+
 use App\Http\Middleware\AlumnoIsAuthenticated;
 
 Route::middleware(AlumnoIsAuthenticated::class)->group(function () {

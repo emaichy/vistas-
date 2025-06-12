@@ -34,7 +34,6 @@ class NotasEvolucionController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            // Cambiado: Ahora la validación 'exists' busca en la columna 'Matricula' de la tabla 'alumnos'
             'ID_Alumno' => 'required|exists:alumnos,Matricula',
             'ID_Paciente' => 'required|exists:pacientes,ID_Paciente',
             'ID_Expediente' => 'required|exists:expedientes,ID_Expediente',
